@@ -25,9 +25,8 @@
 
       overflow:hidden;
 
-      /* 🌆 fundo cyberpunk */
       background-image:
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.85)),
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
         url("https://images.unsplash.com/photo-1496307653780-42ee777d4833");
 
       background-size:cover;
@@ -36,15 +35,12 @@
 
     h1{
       font-size:65px;
-      text-shadow:
-        0 0 10px #00f2ff,
-        0 0 20px #ff00ff;
+      text-shadow:0 0 15px #00f2ff;
     }
 
     .mensagem{
       width:700px;
       font-size:28px;
-      line-height:1.5;
       background:rgba(0,0,0,0.6);
       padding:20px;
       border-radius:20px;
@@ -55,27 +51,12 @@
       margin-top:20px;
       padding:15px 30px;
       font-size:18px;
-
       border:none;
       border-radius:12px;
-
       background:#111;
       color:white;
-
       cursor:pointer;
-
-      box-shadow:
-        0 0 10px #00f2ff,
-        0 0 20px #ff00ff;
-
-      transition:0.3s;
-    }
-
-    button:hover{
-      transform:scale(1.1);
-      box-shadow:
-        0 0 20px #00f2ff,
-        0 0 40px #ff00ff;
+      box-shadow:0 0 15px #00f2ff;
     }
 
     /* 🌧️ chuva */
@@ -103,6 +84,28 @@
       }
     }
 
+    /* ⚡ FLASH DO RELÂMPAGO */
+    .flash {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:white;
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .flash.active {
+      animation: flashAnim 0.2s ease;
+    }
+
+    @keyframes flashAnim {
+      0% {opacity:0;}
+      20% {opacity:0.8;}
+      100% {opacity:0;}
+    }
+
   </style>
 
 </head>
@@ -112,13 +115,12 @@
   <h1>Meu primeiro site 😎</h1>
 
   <p class="mensagem">
-    eu criei esse site 10:28 da manhã adriana,
     salve pepaaaaaa piiiiiggg 🐷
     <br><br>
-    o mais brabo dos brabos da familia
+    agora com chuva e raio ⚡
   </p>
 
-  <!-- 🎵 ÁUDIO LOCAL -->
+  <!-- 🎵 música -->
   <audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
@@ -128,9 +130,12 @@
   <!-- 🌧️ chuva -->
   <div class="rain" id="rain"></div>
 
+  <!-- ⚡ flash -->
+  <div class="flash" id="flash"></div>
+
   <script>
 
-    // 🌧️ criar chuva
+    // 🌧️ chuva
     const rain = document.getElementById("rain");
 
     for(let i = 0; i < 80; i++){
@@ -152,15 +157,28 @@
       audio.play().catch(() => {});
     }
 
-    // 🔥 tenta manter tocando se pausar
+    // ⚡ RELÂMPAGO ALEATÓRIO
+    const flash = document.getElementById("flash");
+
+    function relampago(){
+      flash.classList.add("active");
+
+      setTimeout(() => {
+        flash.classList.remove("active");
+      }, 200);
+    }
+
+    // dispara raio aleatoriamente
     setInterval(() => {
-      if (audio.paused) {
-        audio.play().catch(() => {});
+      if(Math.random() < 0.15){
+        relampago();
       }
-    }, 3000);
+    }, 800);
 
   </script>
 
 </body>
+
+</html>
 
 </html>
