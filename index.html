@@ -12,18 +12,13 @@
 
     body{
       margin:0;
-      height:100vh;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      flex-direction:column;
+      min-height:200vh; /* 🔥 agora tem espaço pra rolar */
 
       text-align:center;
       color:white;
       font-family:Arial;
 
-      overflow:hidden;
+      overflow-x:hidden;
 
       background-image:
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
@@ -33,6 +28,12 @@
       background-position:center;
     }
 
+    /* conteúdo central */
+    .conteudo{
+      position:relative;
+      padding-top:100px;
+    }
+
     h1{
       font-size:65px;
       text-shadow:0 0 15px #00f2ff;
@@ -40,6 +41,7 @@
 
     .mensagem{
       width:700px;
+      margin:0 auto;
       font-size:28px;
       background:rgba(0,0,0,0.6);
       padding:20px;
@@ -61,7 +63,7 @@
 
     /* 🌧️ chuva */
     .rain {
-      position:absolute;
+      position:fixed;
       top:0;
       left:0;
       width:100%;
@@ -84,9 +86,9 @@
       }
     }
 
-    /* ⚡ FLASH DO RELÂMPAGO */
+    /* ⚡ flash */
     .flash {
-      position:absolute;
+      position:fixed;
       top:0;
       left:0;
       width:100%;
@@ -112,20 +114,24 @@
 
 <body>
 
-  <h1>Meu primeiro site 😎</h1>
+  <div class="conteudo">
 
-  <p class="mensagem">
-    salve pepaaaaaa piiiiiggg 🐷
-    <br><br>
-    agora com chuva e raio ⚡
-  </p>
+    <h1>Meu primeiro site 😎</h1>
+
+    <p class="mensagem">
+      agora você pode rolar a página pra cima e pra baixo 😈
+      <br><br>
+      salve pepaaaaaa piiiiiggg 🐷
+    </p>
+
+    <button onclick="tocarMusica()">Tocar música 🎵</button>
+
+  </div>
 
   <!-- 🎵 música -->
   <audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
-
-  <button onclick="tocarMusica()">Tocar música 🎵</button>
 
   <!-- 🌧️ chuva -->
   <div class="rain" id="rain"></div>
@@ -157,18 +163,14 @@
       audio.play().catch(() => {});
     }
 
-    // ⚡ RELÂMPAGO ALEATÓRIO
+    // ⚡ relâmpago
     const flash = document.getElementById("flash");
 
     function relampago(){
       flash.classList.add("active");
-
-      setTimeout(() => {
-        flash.classList.remove("active");
-      }, 200);
+      setTimeout(() => flash.classList.remove("active"), 200);
     }
 
-    // dispara raio aleatoriamente
     setInterval(() => {
       if(Math.random() < 0.15){
         relampago();
@@ -178,7 +180,5 @@
   </script>
 
 </body>
-
-</html>
 
 </html>
