@@ -4,14 +4,13 @@
 <head>
 
   <meta charset="UTF-8">
-
   <title>o mais brabo da familia</title>
 
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/188/188987.png">
 
   <style>
 
-    /* 🌌 FUNDO NEON ANIMADO */
+    /* 🌆 FUNDO CIDADE NEON */
     body{
       margin:0;
       height:100vh;
@@ -25,45 +24,36 @@
       color:white;
       font-family:Arial;
 
-      background: linear-gradient(-45deg,
-        #0f0c29,
-        #302b63,
-        #24243e,
-        #00f2ff,
-        #ff00ff
-      );
+      background-image:
+        linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)),
+        url("https://images.unsplash.com/photo-1496307653780-42ee777d4833");
 
-      background-size: 400% 400%;
-      animation: fundoNeon 10s ease infinite;
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
     }
 
-    @keyframes fundoNeon {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
-    /* ✨ TÍTULO NEON */
+    /* ✨ TÍTULO */
     h1{
-      font-size:70px;
+      font-size:65px;
       text-shadow:
         0 0 10px #00f2ff,
         0 0 20px #ff00ff,
         0 0 40px #00f2ff;
     }
 
-    /* 📦 CAIXA DE TEXTO */
+    /* 📦 TEXTO */
     .mensagem{
       width:700px;
-      font-size:32px;
+      font-size:28px;
       line-height:1.5;
       background:rgba(0,0,0,0.6);
       padding:20px;
       border-radius:20px;
-      box-shadow: 0 0 20px #00f2ff;
+      box-shadow:0 0 20px #00f2ff;
     }
 
-    /* 🔘 BOTÃO NEON ANIMADO */
+    /* 🔘 BOTÃO NEON */
     button{
       margin-top:20px;
       padding:15px 30px;
@@ -87,8 +77,7 @@
       transform:scale(1.1);
       box-shadow:
         0 0 20px #00f2ff,
-        0 0 40px #ff00ff,
-        0 0 60px #00f2ff;
+        0 0 40px #ff00ff;
     }
 
   </style>
@@ -107,7 +96,7 @@
     vai tomando filhão 😎
   </p>
 
-  <!-- 🎵 MÚSICA -->
+  <!-- 🎵 ÁUDIO -->
   <audio id="musica" loop>
     <source src="musica.mp3" type="audio/mpeg">
   </audio>
@@ -117,8 +106,13 @@
   <script>
     function tocarMusica(){
       const audio = document.getElementById("musica");
-      audio.volume = 0.2;
-      audio.play();
+
+      audio.volume = 0.2; // 🔊 baixo
+      audio.load();
+
+      audio.play().catch(() => {
+        alert("❌ Não encontrou musica.mp3 ou o navegador bloqueou o áudio");
+      });
     }
   </script>
 
